@@ -1,0 +1,164 @@
+body {
+    color:#6200EE;
+    font-family: 'Roboto', sans-serif;
+}
+
+#main-div {
+    position: absolute;
+    left: 25%;
+}
+
+.container {
+    position: absolute;
+    border-radius: 3px;
+    /* left: 25%; */
+    z-index: 999999;
+    height: 700px;
+    width: 500px;
+    margin-bottom: 100px;
+}
+
+.header {
+    height: 150px;
+    background-color: #6200ee;
+    color: white;
+    /* position: absolute; */
+}
+
+/* styling for hour, colon and minutes */
+.header span {
+    font-size: 80px;
+    position: absolute;
+}
+
+/* styling for am/pm */
+.header div {
+    position: absolute;
+    left: 366px;
+    font-size: 20px;
+}
+
+#hour {
+    left: 160px;
+    top: 25px;
+}
+
+#colon {
+    left: 248px;
+    top: 25px;
+}
+
+#minute {
+    left: 270px;
+    top: 25px;
+    color: #9e47ff;
+}
+
+
+#morn_text {
+    top: 46px;
+    color: #9e47ff;
+}
+
+#aft_text {
+    top: 76px;
+}
+
+.m_body {
+    height: 500px;
+    border: 1px solid grey;
+    border-bottom: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.option_box {
+    height: 50px;
+    border: 1px solid grey;
+    border-top: none;
+}
+
+.options {
+    font-size: 42px;
+    position: relative;
+}
+
+.ok_text {
+    position: absolute;
+    left: 84%;
+    font-weight: 600;
+}
+
+.cancel_text {
+    position: absolute;
+    left: 60%;
+    font-weight: 600;
+}
+
+/* CLOCK */
+#clock_circle {
+    height: 380px;
+    width: 380px;
+    border-radius: 50%;
+    background-color: #eeeeee;
+    text-align: center;
+    vertical-align: center;
+    line-height: 50px;
+}
+
+.hour_clock_number {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    left: 45%;
+    top: 53.5%;
+    color: black;
+    font-size: 25px;
+
+}
+
+.hour_clock_number_clicked {
+    background-color: yellow;
+    position: absolute;
+    left: 45%;
+    top: 53.5%;
+    border-radius: 50%;
+}
+
+.hour_clock_number:nth-child(1) {
+    transform: rotate(-60deg) translate(160px) rotate(60deg)
+}
+.hour_clock_number:nth-child(2) {
+    transform: rotate(-30deg) translate(160px) rotate(30deg)
+}
+.hour_clock_number:nth-child(3) {
+    transform: rotate(0deg) translate(160px)
+}
+.hour_clock_number:nth-child(4) {
+    transform: rotate(30deg) translate(160px) rotate(-30deg)
+}
+.hour_clock_number:nth-child(5) {
+    transform: rotate(60deg) translate(160px) rotate(-60deg)
+}
+.hour_clock_number:nth-child(6) {
+    transform: rotate(90deg) translate(160px) rotate(-90deg)
+}
+.hour_clock_number:nth-child(7) {
+    transform: rotate(120deg) translate(160px) rotate(-120deg)
+}
+.hour_clock_number:nth-child(8) {
+    transform: rotate(150deg) translate(160px) rotate(-150deg)
+}
+.hour_clock_number:nth-child(9) {
+    transform: rotate(180deg) translate(160px) rotate(-180deg)
+}
+.hour_clock_number:nth-child(10) {
+    transform: rotate(210deg) translate(160px) rotate(-210deg)
+}
+.hour_clock_number:nth-child(11) {
+    transform: rotate(240deg) translate(160px) rotate(-240deg)
+}
+.hour_clock_number:nth-child(12) {
+    transform: rotate(270deg) translate(160px) rotate(-270deg)
+}
