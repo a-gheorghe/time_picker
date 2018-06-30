@@ -97,7 +97,7 @@ body {
 }
 
 /* CLOCK */
-#clock_circle {
+#hour_clock_circle {
     height: 380px;
     width: 380px;
     border-radius: 50%;
@@ -105,9 +105,34 @@ body {
     text-align: center;
     vertical-align: center;
     line-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.hour_clock_number {
+#min_clock_circle {
+    height: 380px;
+    width: 380px;
+    border-radius: 50%;
+    background-color: #eeeeee;
+    text-align: center;
+    vertical-align: center;
+    line-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.pivot {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background-color: black;
+}
+
+.hour_clock_number, .min_clock_number {
     position: absolute;
     height: 50px;
     width: 50px;
@@ -115,7 +140,6 @@ body {
     top: 53.5%;
     color: black;
     font-size: 25px;
-
 }
 
 .hour_clock_number_clicked {
@@ -160,5 +184,49 @@ body {
     transform: rotate(240deg) translate(160px) rotate(-240deg)
 }
 .hour_clock_number:nth-child(12) {
+    transform: rotate(270deg) translate(160px) rotate(-270deg)
+}
+
+.hour_line {
+    stroke:black;
+    stroke-linecap:round;
+    stroke-width: 3px;
+}
+
+
+.min_clock_number:nth-child(5) {
+    transform: rotate(-60deg) translate(160px) rotate(60deg)
+}
+.min_clock_number:nth-child(10) {
+    transform: rotate(-30deg) translate(160px) rotate(30deg)
+}
+.min_clock_number:nth-child(15) {
+    transform: rotate(0deg) translate(160px)
+}
+.min_clock_number:nth-child(20) {
+    transform: rotate(30deg) translate(160px) rotate(-30deg)
+}
+.min_clock_number:nth-child(25) {
+    transform: rotate(60deg) translate(160px) rotate(-60deg)
+}
+.min_clock_number:nth-child(30) {
+    transform: rotate(90deg) translate(160px) rotate(-90deg)
+}
+.min_clock_number:nth-child(35) {
+    transform: rotate(120deg) translate(160px) rotate(-120deg)
+}
+.min_clock_number:nth-child(40) {
+    transform: rotate(150deg) translate(160px) rotate(-150deg)
+}
+.min_clock_number:nth-child(45) {
+    transform: rotate(180deg) translate(160px) rotate(-180deg)
+}
+.min_clock_number:nth-child(50) {
+    transform: rotate(210deg) translate(160px) rotate(-210deg)
+}
+.min_clock_number:nth-child(55) {
+    transform: rotate(240deg) translate(160px) rotate(-240deg)
+}
+.min_clock_number:nth-child(60) {
     transform: rotate(270deg) translate(160px) rotate(-270deg)
 }
