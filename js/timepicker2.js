@@ -8,9 +8,14 @@ class timepicker {
 
 timepicker.prototype.buildModal = function() {
     console.log('this innside buildModal', this)
+    let prevModal = document.getElementById("modal")
+    if (prevModal) {
+        prevModal.remove()
+    }
     let min_clock_circle;
     let hour_clock_circle;
     const modal = document.createElement('div')
+    modal.setAttribute("id", "modal")
     const container = document.createElement('div')
     container.classList.add("container")
     const header = document.createElement('div')
@@ -47,8 +52,8 @@ timepicker.prototype.buildModal = function() {
     colon.textContent = ":"
     aft.textContent = "PM"
     morn.textContent = "AM"
-    hour.textContent = "12"
-    minute.textContent = "00"
+    hour.textContent = this.hour
+    minute.textContent = this.minute
     header.appendChild(hour)
     header.appendChild(colon)
     header.appendChild(minute)
@@ -56,10 +61,7 @@ timepicker.prototype.buildModal = function() {
     header.appendChild(morn)
 
     const make_min_clock = () => {
-        // let self = this
-        // if (min_clock_circle) return
-        console.log('this inside make_min_clock', this)
-        hour_clock_circle.style.display = 'none'
+        hour_clock_circle.remove()
         min_clock_circle = document.createElement('div')
         min_clock_circle.setAttribute("id", "min_clock_circle")
         m_body.appendChild(min_clock_circle)
@@ -76,6 +78,18 @@ timepicker.prototype.buildModal = function() {
             }
             min_clock_circle.appendChild(min_clock_number)
         }
+
+        console.log('this.minute issssss', this.minute)
+        let curr_min;
+        if (this.minute === "00") {
+            curr_min = document.getElementById('min_clock_number_60')
+        } else if (this.minute >= 1 && this.minute < 10) {
+            curr_min = document.getElementById('min_clock_number_' + this.minute[1])
+        } else {
+            curr_min = document.getElementById(`min_clock_number_${this.minute}`)
+        }
+        curr_min.classList.add("min_clock_number_clicked")
+        console.log('curr_min is ', curr_min)
 
         const min_clock_pivot = document.createElement('div')
         min_clock_pivot.classList.add("pivot")
@@ -110,10 +124,8 @@ timepicker.prototype.buildModal = function() {
 
     // FUNCTION TO MAKE HOUR CLOCK
     const make_hour_clock = () => {
-        // if (hour_clock_circle) return
-        console.log('this inside make_hour_clock', this)
         if (min_clock_circle) {
-            min_clock_circle.style.display = 'none'
+            min_clock_circle.remove()
         }
         hour_clock_circle = document.createElement('div')
         hour_clock_circle.setAttribute("id", "hour_clock_circle")
@@ -124,21 +136,19 @@ timepicker.prototype.buildModal = function() {
             hour_clock_number.classList.add("hour_clock_number")
             hour_clock_number.setAttribute("id", `hour_clock_number_${i}`)
             hour_clock_number.textContent = i;
-            // if (i === 12) {
-            //     hour_clock_number.classList.add("hour_clock_number_clicked")
-            // }
             hour_clock_circle.append(hour_clock_number)
         }
 
+
         let curr_hour = document.getElementById(`hour_clock_number_${this.hour}`)
         curr_hour.classList.add("hour_clock_number_clicked")
+        console.log('curr_hour is ', curr_hour)
         // console.log('curr_hour is ', curr_hour)
-        // curr_hour.classList.add("hour_clock_number_clicked")
 
         // make pivot
-        const hour_clock_pivot = document.createElement('div')
-        hour_clock_pivot.classList.add("pivot")
-        hour_clock_circle.appendChild(hour_clock_pivot)
+        // const hour_clock_pivot = document.createElement('div')
+        // hour_clock_pivot.classList.add("pivot")
+        // hour_clock_circle.appendChild(hour_clock_pivot)
 
 
         // add style to clicked number and update hour to clicked number
