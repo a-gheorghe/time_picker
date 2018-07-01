@@ -1,5 +1,6 @@
-const make_min_clock = function() {
-    const min_clock_circle = document.createElement('div')
+const make_min_clock = function(m_body, hour_clock_circle) {
+    hour_clock_circle.style.display = 'none'
+    min_clock_circle = document.createElement('div')
     min_clock_circle.setAttribute("id", "min_clock_circle")
     m_body.appendChild(min_clock_circle)
 
@@ -13,6 +14,6 @@ const make_min_clock = function() {
         if (i === 60){
             min_clock_number.textContent = "00"
         }
-        min_clock_circle = append(min_clock_number)
+        min_clock_circle.appendChild(min_clock_number)
     }
 }
