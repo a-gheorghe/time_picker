@@ -10,10 +10,9 @@ timepicker.prototype.buildModal = function() {
     console.log('this innside buildModal', this)
     let min_clock_circle;
     let hour_clock_circle;
-    // make the outline and the options ok/cancel text
+    const modal = document.createElement('div')
     const container = document.createElement('div')
     container.classList.add("container")
-    // container.setAttribute("id", "modal-content")
     const header = document.createElement('div')
     header.classList.add("header")
     container.appendChild(header)
@@ -31,7 +30,8 @@ timepicker.prototype.buildModal = function() {
     cancel_text.innerText = "CANCEL"
     options.appendChild(ok_text)
     options.appendChild(cancel_text)
-    document.getElementById("main-div").appendChild(container)
+    modal.appendChild(container)
+    document.getElementById("main-div").appendChild(modal)
 
     // make the time info and append to header
     const hour = document.createElement('span')
@@ -56,6 +56,8 @@ timepicker.prototype.buildModal = function() {
     header.appendChild(morn)
 
     const make_min_clock = () => {
+        // let self = this
+        // if (min_clock_circle) return
         console.log('this inside make_min_clock', this)
         hour_clock_circle.style.display = 'none'
         min_clock_circle = document.createElement('div')
@@ -81,8 +83,8 @@ timepicker.prototype.buildModal = function() {
 
         let min_all_clock_numbers = Array.from(document.getElementsByClassName("min_clock_number"))
 
-        min_all_clock_numbers.forEach(function(number){
-            number.addEventListener("click", function(){
+        min_all_clock_numbers.forEach((number) => {
+            number.addEventListener("click", () => {
                 let min_clicked_number = Array.from(document.getElementsByClassName("min_clock_number_clicked"))
                 if (min_clicked_number.length === 0) {
                     number.classList.add("min_clock_number_clicked")
@@ -94,7 +96,6 @@ timepicker.prototype.buildModal = function() {
                 }
                 if (isNaN(number.id[number.id.length - 2])) {
                     this.minute = "" + 0 + number.id[number.id.length - 1]
-                    console.log('this.minute is ', this.minute)
                 } else {
                     if (number.id === 'min_clock_number_60'){
                         this.minute = "00"
@@ -109,6 +110,7 @@ timepicker.prototype.buildModal = function() {
 
     // FUNCTION TO MAKE HOUR CLOCK
     const make_hour_clock = () => {
+        // if (hour_clock_circle) return
         console.log('this inside make_hour_clock', this)
         if (min_clock_circle) {
             min_clock_circle.style.display = 'none'
@@ -129,7 +131,6 @@ timepicker.prototype.buildModal = function() {
         }
 
         let curr_hour = document.getElementById(`hour_clock_number_${this.hour}`)
-        console.log('this.hour is', this.hour, 'curr_hour is', curr_hour)
         curr_hour.classList.add("hour_clock_number_clicked")
         // console.log('curr_hour is ', curr_hour)
         // curr_hour.classList.add("hour_clock_number_clicked")
@@ -144,8 +145,8 @@ timepicker.prototype.buildModal = function() {
         let hour_all_clock_numbers = Array.from(document.getElementsByClassName("hour_clock_number"))
         // for each number, add a click handler to change the background color
         // also change hour.text content based on what is clicked
-        hour_all_clock_numbers.forEach(function(number){
-            number.addEventListener("click", function(){
+        hour_all_clock_numbers.forEach((number) => {
+            number.addEventListener("click", () => {
                 let hour_clicked_number = Array.from(document.getElementsByClassName("hour_clock_number_clicked"))
                 if (hour_clicked_number.length === 0) {
                     number.classList.add("hour_clock_number_clicked")
@@ -154,17 +155,19 @@ timepicker.prototype.buildModal = function() {
                         hour_clicked_number[i].classList.remove("hour_clock_number_clicked")
                     }
                     number.classList.add("hour_clock_number_clicked")
+
                 }
                 if (isNaN(number.id[number.id.length - 2])) {
                     this.hour = "" + number.id[number.id.length - 1]
-                    console.log('this.hour in here is ', this.hour)
+                    console.log('this in here is ', this)
                 } else {
                     this.hour = "" + number.id[number.id.length - 2] + number.id[number.id.length - 1]
-                    console.log('this.hour out there is ', this.hour)
+                    console.log('this out there is ', this)
                 }
                 hour.textContent = this.hour
             })
         })
+        console.log('this outer outer', this)
     }
 
 
