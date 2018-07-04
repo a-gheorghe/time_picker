@@ -1,18 +1,106 @@
-body {
+body, html {
     color:#6200EE;
     font-family: 'Roboto', sans-serif;
+    height: 100vh;
+    width: 100vw;
+    background-color: #f4f4f4;
 }
 
 #main-div {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+}
+
+.main-header {
+    height: 278px;
+    background-color: #6200ee;
+    width: 100%;
+    position:absolute;
+}
+
+
+#modal {
     position: absolute;
-    left: 25%;
+    border-radius: 3px;
+    z-index: 999999;
+    height: 100%;
+    width: 100%;
+    background-color:rgba(1,1,1,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.event-listing {
+    position: relative;
+    background-color: white;
+    margin: 0 auto;
+    padding: 3rem 1.75rem 2.5rem;
+    border-top: 15px solid #6200ee;
+    margin-bottom: 1.75rem;
+    border-radius: 6px;
+    width: 400px;
+    z-index: 999999;
+}
+
+/* form stylings */
+.group {
+  position:relative;
+  margin-bottom:45px;
+}
+
+input {
+  font-size:18px;
+  padding:10px 10px 10px 5px;
+  display:block;
+  width:350px;
+  border:none;
+  border-bottom:1px solid #757575;
+}
+
+input:focus {
+    outline:none;
+}
+
+label {
+    color:#999;
+    font-size:18px;
+    font-weight:normal;
+    position:absolute;
+    pointer-events:none;
+    left:5px;
+    top:10px;
+    transition:0.2s;
+}
+
+input:focus ~ label,
+input:valid ~ label {
+  top:-20px;
+  font-size:14px;
+  color:#5264AE;
+}
+
+
+.time-label {
+    top: -20px;
+}
+
+
+.time-input {
+    width: 340px;
+    display: inline;
+}
+
+.event-holder {
+    position: relative;
+    top: 300px;
 }
 
 .container {
     position: absolute;
     border-radius: 3px;
-    /* left: 25%; */
-    z-index: 999999;
+    z-index: 1;
     height: 700px;
     width: 500px;
     margin-bottom: 100px;
@@ -21,8 +109,7 @@ body {
 .header {
     height: 150px;
     background-color: #6200ee;
-    color: white;
-    /* position: absolute; */
+    color: #9e47ff
 }
 
 /* styling for hour, colon and minutes */
@@ -51,32 +138,36 @@ body {
 #minute {
     left: 270px;
     top: 25px;
-    color: #9e47ff;
 }
 
 
 #morn_text {
     top: 46px;
-    color: #9e47ff;
+    /* color: #9e47ff */
+}
+
+.selected_text {
+    color: white;
 }
 
 #aft_text {
     top: 76px;
+    /* color: #9e47ff */
 }
 
 .m_body {
     height: 500px;
-    border: 1px solid grey;
     border-bottom: none;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: white;
 }
 
 .option_box {
     height: 50px;
-    border: 1px solid grey;
     border-top: none;
+    background-color: white;
 }
 
 .options {
@@ -110,20 +201,6 @@ body {
     justify-content: center;
 }
 
-/* #min_clock_circle {
-    height: 380px;
-    width: 380px;
-    border-radius: 50%;
-    background-color: #eeeeee;
-    text-align: center;
-    vertical-align: center;
-    line-height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-} */
-
-
 
 .pivot {
     height: 10px;
@@ -149,7 +226,6 @@ body {
     top: 53.5%;
     border-radius: 50%;
     color: white;
-    /* opacity: 0.5; */
 }
 
 .hour_clock_number:nth-child(1) {

@@ -9,21 +9,81 @@
     </head>
     <body>
         <div id="main-div">
-            <div> Event time:
-                <input type= "time" placeholder="No value chosen yet" value=""> </input>
-                <img id="clock_icon1" src="./images/baseline-access_time-24px.svg">
-            </div>
-            <p> Event time:
-                <input type= "time" placeholder="No value chosen yet" value=""> </input>
-                <img id="clock_icon2" src="./images/baseline-access_time-24px.svg">
-            </p>
-            <p> Event time:
-                <input type= "time" placeholder="No value chosen yet" value=""> </input>
-                <img id="clock_icon3" src="./images/baseline-access_time-24px.svg">
-            </p>
-        </div>
+            <div class="main-header"></div>
+                <div class="event-holder">
+                    <div class="event-listing" id="event-1">
+                        <form>
+                            <div class="group">
+                                <input type="text" required>
+                                <span class="highlight"> </span>
+                                <span class="bar"> </span>
+                                <label> Event Title </label>
+                            </div>
+                            <div class="group">
+                                <input type="text" required>
+                                <span class="highlight"> </span>
+                                <span class="bar"> </span>
+                                <label> Location </label>
+                            </div>
+                            <div class="group">
+                                <input class="time-input" id="input-1" type="time" value="" required>
+                                <img id="clock_icon1" src="./images/baseline-access_time-24px.svg">
+                                <span class="highlight"> </span>
+                                <span class="bar"> </span>
+                                <label class="time-label"> Time </label>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="event-listing" id="event-2">
+                        <form>
+                            <div class="group">
+                                <input type="text" required>
+                                <span class="highlight"> </span>
+                                <span class="bar"> </span>
+                                <label> Event Title </label>
+                            </div>
+                            <div class="group">
+                                <input type="text" required>
+                                <span class="highlight"> </span>
+                                <span class="bar"> </span>
+                                <label> Location </label>
+                            </div>
+                            <div class="group">
+                                <input id="input-2" class="time-input" type="time" value="" required>
+                                <img id="clock_icon2" src="./images/baseline-access_time-24px.svg">
+                                <span class="highlight"> </span>
+                                <span class="bar"> </span>
+                                <label class="time-label"> Time </label>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="event-listing" id="event-3">
+                        <form>
+                            <div class="group">
+                                <input type="text" required>
+                                <span class="highlight"> </span>
+                                <span class="bar"> </span>
+                                <label> Event Title </label>
+                            </div>
+                            <div class="group">
+                                <input type="text" required>
+                                <span class="highlight"> </span>
+                                <span class="bar"> </span>
+                                <label> Location </label>
+                            </div>
+                            <div class="group">
+                                <input id="input-3" class="time-input" type="time" value="" required>
+                                <img id="clock_icon3" src="./images/baseline-access_time-24px.svg">
+                                <span class="highlight"> </span>
+                                <span class="bar"> </span>
+                                <label class="time-label"> Time </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+    </div>
         <script src="./js/timepicker2.js"> </script>
-        <!-- <script src="./js/make_minute_clock.js"> </script> -->
-        <script src="./js/modal.js"> </script>
     </body>
 </html>
