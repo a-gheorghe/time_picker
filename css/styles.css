@@ -21,7 +21,9 @@ body, html {
 
 
 #modal {
-    position: absolute;
+    position: fixed;
+    left: 0;
+    top: 0;
     border-radius: 3px;
     z-index: 999999;
     height: 100%;
