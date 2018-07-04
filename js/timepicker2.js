@@ -1,15 +1,40 @@
 class timepicker {
-    constructor(hour, minute, time_of_day) {
+    constructor() {
         this.prev_hour = "12"
         this.prev_minute = "00"
         this.prev_time_of_day = "AM"
-        this.hour = hour || "12"
-        this.minute = minute || "00"
-        this.time_of_day = time_of_day || "AM"
+        this.hour = "12"
+        this.minute = "00"
+        this.time_of_day = "AM"
     }
 }
 
-timepicker.prototype.buildModal = function(input_num) {
+timepicker.prototype.buildModal = function(input_num, h, m) {
+    console.log('h is ', h)
+    // if an hour and min are given from the input field
+        // set this.hour to be the input field hour
+        // set this.minute to be the input field minute
+    if (h) {
+        if (h > 12) {
+            this.hour = h - 12
+            this.time_of_day = "PM"
+        } else if (h == 12) {
+            this.hour = 12
+            this.time_of_day = "PM"
+        } else if (h == 0) {
+            this.hour = 12
+            this.time_of_day = "AM"
+        } else {
+            this.hour = h
+        }
+    }
+    if (m) {
+        this.minute = m
+    }
+    // check for edge case when this.hour is 0
+    if (this.hour == 0) {
+        this.hour = 12
+    }
     // declare variables
     let min_clock_circle;
     let hour_clock_circle;
@@ -56,6 +81,7 @@ timepicker.prototype.buildModal = function(input_num) {
     colon.textContent = ":"
     aft.textContent = "PM"
     morn.textContent = "AM"
+    console.log('first loading this.hour', this.hour)
     hour.textContent = this.hour
     minute.textContent = this.minute
 
@@ -77,10 +103,50 @@ timepicker.prototype.buildModal = function(input_num) {
     ok_text.addEventListener("click", (e) => {
         let hour_to_set;
         let input_fill = document.getElementById(`input-${input_num}`)
-        if (this.hour < 10) {
+        console.log('this.hour is ', this.hour)
+        if (aft.classList.contains("selected_text")) {
+            console.log('aft chosen')
+
+            if (this.hour == 12) {
+                console.log('chosen 12')
+                hour_to_set = this.hour
+            } else if (this.hour == 1) {
+                console.log('chosen 1')
+                hour_to_set = 13
+            } else if (this.hour == 2) {
+                hour_to_set = 14
+            } else if (this.hour == 3) {
+                hour_to_set = 15
+            } else if (this.hour == 4) {
+                hour_to_set = 16
+            } else if (this.hour == 5) {
+                hour_to_set = 17
+            } else if (this.hour == 6) {
+                hour_to_set = 18
+            } else if (this.hour == 7) {
+                hour_to_set = 19
+            } else if (this.hour == 8) {
+                hour_to_set = 20
+            } else if (this.hour == 9) {
+                hour_to_set = 21
+            } else if (this.hour == 10) {
+                hour_to_set = 22
+            } else if (this.hour == 11) {
+                hour_to_set = 23
+            }
+        } else if (this.hour < 10 && morn.classList.contains("selected_text")) {
+            console.log('morn chosen and less than 10 ')
+            console.log('this.hour is ', this.hour)
             hour_to_set = `0${this.hour}`
         } else {
-            hour_to_set = this.hour
+            console.log('morning and more than 10')
+            if (this.hour == 12) {
+                console.log('this.hour inside morning more than 10', this.hour)
+                hour_to_set = "00"
+                console.log('hour to set in here', hour_to_set)
+            } else {
+                hour_to_set = this.hour
+            }
         }
         input_fill.value = `${hour_to_set}:${this.minute}`
         modal.remove()
@@ -218,8 +284,10 @@ timepicker.prototype.buildModal = function(input_num) {
         hour_clock_circle.setAttribute("id", "hour_clock_circle")
         hour_clock_pivot.classList.add("pivot")
 
+
         // add class to indicate clicked number
         let curr_hour = document.getElementById(`hour_clock_number_${this.hour}`)
+        console.log('in between this.hour', this.hour)
         curr_hour.classList.add("hour_clock_number_clicked")
 
 
@@ -241,11 +309,15 @@ timepicker.prototype.buildModal = function(input_num) {
                     number.classList.add("hour_clock_number_clicked")
 
                 }
+                // if (this.hour == 12 && morn.classList.contains("selected_text")) {
+                //     this.hour = "00"
+                // }
                 if (isNaN(number.id[number.id.length - 2])) {
                     this.hour = "" + number.id[number.id.length - 1]
                 } else {
                     this.hour = "" + number.id[number.id.length - 2] + number.id[number.id.length - 1]
                 }
+                console.log('this.hour is check check check ', this.hour)
                 hour.textContent = this.hour
             })
         })
@@ -270,11 +342,44 @@ let picker3 = new timepicker()
 
 
 const clock_icon1 = document.getElementById("clock_icon1")
-clock_icon1.addEventListener("click", () => picker1.buildModal(1))
+const input1 = document.getElementById("input-1")
+clock_icon1.addEventListener("click", () => {
+    input1_arr = input1.value.split(":")
+    if (input1_arr[0] < 10) {
+        input1_arr[0] = input1_arr[0][1]
+    }
+    if (input1_arr.length > 1) {
+        picker1.buildModal(1, input1_arr[0], input1_arr[1])
+    } else {
+        picker1.buildModal(1)
+    }
+})
 
 
 const clock_icon2 = document.getElementById("clock_icon2")
-clock_icon2.addEventListener("click", () => picker2.buildModal(2))
+const input2 = document.getElementById("input-2")
+clock_icon2.addEventListener("click", () => {
+    input2_arr = input2.value.split(":")
+    if (input2_arr[0] < 10) {
+        input2_arr[0] = input2_arr[0][1]
+    }
+    if (input2_arr.length > 1) {
+        picker2.buildModal(2, input2_arr[0], input2_arr[1])
+    } else {
+        picker2.buildModal(2)
+    }
+})
 
 const clock_icon3 = document.getElementById("clock_icon3")
-clock_icon3.addEventListener("click", () => picker3.buildModal(3))
+const input3 = document.getElementById("input-3")
+clock_icon3.addEventListener("click", () => {
+    input3_arr = input3.value.split(":")
+    if (input3_arr[0] < 10) {
+        input3_arr[0] = input3_arr[0][1]
+    }
+    if (input3_arr.length > 1) {
+        picker3.buildModal(3, input3_arr[0], input3_arr[1])
+    } else {
+        picker3.buildModal(3)
+    }
+})
