@@ -10,7 +10,9 @@ class timepicker {
 }
 
 timepicker.prototype.buildModal = function(input_num, h, m) {
-    console.log('h is ', h)
+    console.log('h is ', h, 'm is ', m)
+    console.log('this right when building modal', this)
+
     // if an hour and min are given from the input field
         // set this.hour to be the input field hour
         // set this.minute to be the input field minute
@@ -35,9 +37,13 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
     if (this.hour == 0) {
         this.hour = 12
     }
+
+    console.log('this slightly after', this)
     // declare variables
     let min_clock_circle;
     let hour_clock_circle;
+    let hour_clicked;
+    let min_clicked;
 
     // create (or obtain) structural modal elements
     const main_div = document.getElementById("main-div")
@@ -81,7 +87,6 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
     colon.textContent = ":"
     aft.textContent = "PM"
     morn.textContent = "AM"
-    console.log('first loading this.hour', this.hour)
     hour.textContent = this.hour
     minute.textContent = this.minute
 
@@ -99,19 +104,56 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
     header.appendChild(morn)
 
     // add event listeners to elements
-    cancel_text.addEventListener("click", () => modal.remove())
+    // add event listeners:
+    // make minute clock when clicking minute span element
+    // make hour clock when clicking hour span element
+    minute.addEventListener("click", () => {
+        hour_clicked = Array.from(document.getElementsByClassName("hour_clock_number_clicked"))[0].innerText
+        console.log('hour_clicked is ', hour_clicked)
+        make_min_clock()
+    })
+
+    hour.addEventListener("click", () => {
+        min_clicked = Array.from(document.getElementsByClassName("min_clock_number_clicked"))[0].innerText
+        // min_clicked = Array.from(document.getElementsByClassName("min_clock_number_clicked"))
+
+
+        console.log('min_clicked is ', min_clicked)
+        make_hour_clock()
+    })
+
+
+
     ok_text.addEventListener("click", (e) => {
+        // if clicking ok from minute clock
+        // need to check one that is clicked
+        if (min_clock_circle) {
+            min_clicked = Array.from(document.getElementsByClassName("min_clock_number_clicked"))[0].innerText
+        }
+        // if no min_clickd
+        // ie. never navigated to minute clock, used default
+        if (!min_clicked) {
+            min_clicked = this.minute
+        }
+        // if clicking ok from hour clock
+        // need to check one that is clicked
+        if (hour_clock_circle) {
+            hour_clicked = Array.from(document.getElementsByClassName("hour_clock_number_clicked"))[0].innerText
+        }
         let hour_to_set;
         let input_fill = document.getElementById(`input-${input_num}`)
-        console.log('this.hour is ', this.hour)
+        console.log('hour_clicked', hour_clicked)
+        console.log('min_clicked', min_clicked)
+        this.prev_hour = this.hour
+        this.hour = hour_clicked
+        this.prev_minute = this.minute
+        this.minute = min_clicked
         if (aft.classList.contains("selected_text")) {
-            console.log('aft chosen')
-
+            this.prev_time_of_day = this.time_of_day
+            this.time_of_day = "PM"
             if (this.hour == 12) {
-                console.log('chosen 12')
                 hour_to_set = this.hour
             } else if (this.hour == 1) {
-                console.log('chosen 1')
                 hour_to_set = 13
             } else if (this.hour == 2) {
                 hour_to_set = 14
@@ -134,29 +176,92 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
             } else if (this.hour == 11) {
                 hour_to_set = 23
             }
-        } else if (this.hour < 10 && morn.classList.contains("selected_text")) {
-            console.log('morn chosen and less than 10 ')
-            console.log('this.hour is ', this.hour)
-            hour_to_set = `0${this.hour}`
+        //
         } else {
-            console.log('morning and more than 10')
-            if (this.hour == 12) {
-                console.log('this.hour inside morning more than 10', this.hour)
+            this.prev_time_of_day = this.time_of_day
+            this.time_of_day = "AM"
+            if (this.hour < 10) {
+                hour_to_set = `0${this.hour}`
+            } else if (this.hour == 12) {
                 hour_to_set = "00"
-                console.log('hour to set in here', hour_to_set)
             } else {
                 hour_to_set = this.hour
             }
         }
+        // working
+        // } else if (this.hour < 10 && morn.classList.contains("selected_text")) {
+        //     hour_to_set = `0${this.hour}`
+        // } else {
+        //     if (this.hour == 12) {
+        //         hour_to_set = "00"
+        //     } else {
+        //         hour_to_set = this.hour
+        //     }
+        // }
         input_fill.value = `${hour_to_set}:${this.minute}`
         modal.remove()
     })
 
+    cancel_text.addEventListener("click", (e) => {
+        let hour_to_set;
+        let input_fill = document.getElementById(`input-${input_num}`)
+        if (this.prev_time_of_day === "AM") {
+            morn.classList.add("selected_text")
+            aft.classList.remove("selected_text")
+        } else {
+            morn.classList.remove("selected_text")
+            aft.classList.add("selected_text")
+        }
+        if (aft.classList.contains("selected_text")) {
+            if (this.prev_hour == 12) {
+                hour_to_set = this.prev_hour
+            } else if (this.prev_hour == 1) {
+                hour_to_set = 13
+            } else if (this.prev_hour == 2) {
+                hour_to_set = 14
+            } else if (this.prev_hour == 3) {
+                hour_to_set = 15
+            } else if (this.prev_hour == 4) {
+                hour_to_set = 16
+            } else if (this.prev_hour == 5) {
+                hour_to_set = 17
+            } else if (this.prev_hour == 6) {
+                hour_to_set = 18
+            } else if (this.prev_hour == 7) {
+                hour_to_set = 19
+            } else if (this.prev_hour == 8) {
+                hour_to_set = 20
+            } else if (this.prev_hour == 9) {
+                hour_to_set = 21
+            } else if (this.prev_hour == 10) {
+                hour_to_set = 22
+            } else if (this.prev_hour == 11) {
+                hour_to_set = 23
+            }
+        } else if (this.prev_hour < 10 && morn.classList.contains("selected_text")) {
+            hour_to_set = `0${this.prev_hour}`
+        } else {
+            if (this.prev_hour == 12) {
+                hour_to_set = "00"
+            } else {
+                hour_to_set = this.prev_hour
+            }
+        }
+        input_fill.value = `${hour_to_set}:${this.prev_minute}`
+        modal.remove()
+    })
+
+
+
     morn.addEventListener("click", () => {
+        this.prev_time_of_day = this.time_of_day
+        this.time_of_day = "AM"
         aft.classList.remove("selected_text")
         morn.classList.add("selected_text")
     })
     aft.addEventListener("click", () => {
+        this.prev_time_of_day = this.time_of_day
+        this.time_of_day = "PM"
         morn.classList.remove("selected_text")
         aft.classList.add("selected_text")
     })
@@ -232,11 +337,14 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
                     number.classList.add("min_clock_number_clicked")
                 }
                 if (isNaN(number.id[number.id.length - 2])) {
+                    this.prev_minute = this.minute
                     this.minute = "" + 0 + number.id[number.id.length - 1]
                 } else {
                     if (number.id === 'min_clock_number_60'){
+                        this.prev_minute = this.minute
                         this.minute = "00"
                     } else {
+                        this.prev_minute = this.minute
                         this.minute = "" + number.id[number.id.length - 2] + number.id[number.id.length - 1]
                     }
                 }
@@ -252,11 +360,9 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
         let min_clock_circle = document.getElementById("min_clock_circle")
         let hour_clock_circle = document.getElementById("hour_clock_circle")
         if (min_clock_circle) {
-            console.log('min clock circle exists, removing it')
             min_clock_circle.remove()
         }
         if (hour_clock_circle) {
-            console.log('hour clock circle exists, returning')
             return;
         }
 
@@ -287,15 +393,13 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
 
         // add class to indicate clicked number
         let curr_hour = document.getElementById(`hour_clock_number_${this.hour}`)
-        console.log('in between this.hour', this.hour)
         curr_hour.classList.add("hour_clock_number_clicked")
 
 
         // add event listener on each clock number to:
             // remove clicked class from all other numbers
             // add clicked class to clicked number
-            // make this.hour equal the number clicked on
-            // set the text of the hour span to this.hour
+            // set the text of the hour span to the number clicked on
         let hour_all_clock_numbers = Array.from(document.getElementsByClassName("hour_clock_number"))
         hour_all_clock_numbers.forEach((number) => {
             number.addEventListener("click", () => {
@@ -313,22 +417,20 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
                 //     this.hour = "00"
                 // }
                 if (isNaN(number.id[number.id.length - 2])) {
-                    this.hour = "" + number.id[number.id.length - 1]
+                    hour.textContent = "" + number.id[number.id.length - 1]
+                    // this.prev_hour = this.hour
+                    // this.hour = "" + number.id[number.id.length - 1]
                 } else {
-                    this.hour = "" + number.id[number.id.length - 2] + number.id[number.id.length - 1]
+                    hour.textContent = "" + number.id[number.id.length - 2] + number.id[number.id.length - 1]
+                    // this.prev_hour = this.hour
+                    // this.hour = "" + number.id[number.id.length - 2] + number.id[number.id.length - 1]
                 }
-                console.log('this.hour is check check check ', this.hour)
-                hour.textContent = this.hour
+                // hour.textContent = this.hour
             })
         })
     }
 
 
-    // add event listeners:
-        // make minute clock when clicking minute span element
-        // make hour clock when clicking hour span element
-    minute.addEventListener("click", () => make_min_clock())
-    hour.addEventListener("click", () => make_hour_clock())
 
     // make hour clock initially as default
     make_hour_clock()
