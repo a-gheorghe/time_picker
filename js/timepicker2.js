@@ -183,6 +183,11 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
         const min_clock_pivot = document.createElement('div')
         for (let i = 1; i < 61; i++) {
             let min_clock_number = document.createElement('div')
+            let min_color_div = document.createElement('div')
+
+            min_color_div.classList.add("min_color_div")
+            min_color_div.setAttribute("id", `min_color_div_${i}`)
+
             min_clock_number.classList.add("min_clock_number")
             min_clock_number.setAttribute("id", `min_clock_number_${i}`)
             if (i % 5 === 0) {
@@ -191,6 +196,7 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
             if (i === 60) {
                 min_clock_number.textContent = "00"
             }
+            min_clock_circle.appendChild(min_color_div)
             min_clock_circle.appendChild(min_clock_number)
         }
 
@@ -211,7 +217,7 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
         } else {
             curr_min = document.getElementById(`min_clock_number_${this.minute}`)
         }
-        curr_min.classList.add("min_clock_number_clicked")
+        curr_min.classList.add("min_color_div_clicked")
 
 
         // add event listener on each clock number to:
@@ -222,15 +228,21 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
         let min_all_clock_numbers = Array.from(document.getElementsByClassName("min_clock_number"))
         min_all_clock_numbers.forEach((number) => {
             number.addEventListener("click", () => {
-                let min_clicked_number = Array.from(document.getElementsByClassName("min_clock_number_clicked"))
-                if (min_clicked_number.length === 0) {
-                    number.classList.add("min_clock_number_clicked")
-                } else {
+                let min_clicked_number = Array.from(document.getElementsByClassName("min_color_div_clicked"))
+                let small_clicked_number = Array.from(document.getElementsByClassName("small_color"))
+
                     for (let i = 0; i < min_clicked_number.length; i++) {
-                        min_clicked_number[i].classList.remove("min_clock_number_clicked")
+                        min_clicked_number[i].classList.remove("min_color_div_clicked")
                     }
-                    number.classList.add("min_clock_number_clicked")
-                }
+                    for (let i = 0; i < small_clicked_number.length; i++) {
+                        small_clicked_number[i].classList.remove("small_color")
+                    }
+                    if (number.id[number.id.length -1 ] % 5 !== 0) {
+                        number.classList.add("small_color")
+                    } else {
+                        number.classList.add("min_color_div_clicked")
+                    }
+
                 if (isNaN(number.id[number.id.length - 2])) {
                     this.minute = "" + 0 + number.id[number.id.length - 1]
                 } else {
@@ -252,11 +264,9 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
         let min_clock_circle = document.getElementById("min_clock_circle")
         let hour_clock_circle = document.getElementById("hour_clock_circle")
         if (min_clock_circle) {
-            console.log('min clock circle exists, removing it')
             min_clock_circle.remove()
         }
         if (hour_clock_circle) {
-            console.log('hour clock circle exists, returning')
             return;
         }
 
@@ -270,10 +280,17 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
         const hour_clock_pivot = document.createElement('div')
         for (let i = 1; i < 13; i++) {
             let hour_clock_number = document.createElement('div')
+            let hour_color_div = document.createElement('div')
+
+            hour_color_div.classList.add("hour_color_div")
+            hour_color_div.setAttribute("id", `hour_color_div_${i}`)
+
             hour_clock_number.classList.add("hour_clock_number")
             hour_clock_number.setAttribute("id", `hour_clock_number_${i}`)
             hour_clock_number.textContent = i;
-            hour_clock_circle.append(hour_clock_number)
+            hour_clock_circle.appendChild(hour_color_div)
+            hour_clock_circle.appendChild(hour_clock_number)
+            // hour_color_div.appendChild(hour_clock_number)
         }
 
         // append clock items to modal body
@@ -287,8 +304,7 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
 
         // add class to indicate clicked number
         let curr_hour = document.getElementById(`hour_clock_number_${this.hour}`)
-        console.log('in between this.hour', this.hour)
-        curr_hour.classList.add("hour_clock_number_clicked")
+        curr_hour.classList.add("hour_color_div_clicked")
 
 
         // add event listener on each clock number to:
@@ -299,25 +315,21 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
         let hour_all_clock_numbers = Array.from(document.getElementsByClassName("hour_clock_number"))
         hour_all_clock_numbers.forEach((number) => {
             number.addEventListener("click", () => {
-                let hour_clicked_number = Array.from(document.getElementsByClassName("hour_clock_number_clicked"))
-                if (hour_clicked_number.length === 0) {
-                    number.classList.add("hour_clock_number_clicked")
-                } else {
+                let hour_clicked_number = Array.from(document.getElementsByClassName("hour_color_div_clicked"))
+                // if (hour_clicked_number.length === 0) {
+                //     number.classList.add("hour_color_div_clicked")
+                // } else {
                     for (let i = 0; i < hour_clicked_number.length; i++) {
-                        hour_clicked_number[i].classList.remove("hour_clock_number_clicked")
+                        hour_clicked_number[i].classList.remove("hour_color_div_clicked")
                     }
-                    number.classList.add("hour_clock_number_clicked")
-
-                }
-                // if (this.hour == 12 && morn.classList.contains("selected_text")) {
-                //     this.hour = "00"
+                    number.classList.add("hour_color_div_clicked")
+//
                 // }
                 if (isNaN(number.id[number.id.length - 2])) {
                     this.hour = "" + number.id[number.id.length - 1]
                 } else {
                     this.hour = "" + number.id[number.id.length - 2] + number.id[number.id.length - 1]
                 }
-                console.log('this.hour is check check check ', this.hour)
                 hour.textContent = this.hour
             })
         })
