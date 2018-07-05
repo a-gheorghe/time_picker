@@ -132,6 +132,8 @@ input:valid ~ label {
     top: 25px;
 }
 
+
+
 #colon {
     left: 248px;
     top: 25px;
@@ -202,9 +204,8 @@ input:valid ~ label {
     align-items: center;
     justify-content: center;
 	border: 1px solid black;
+	z-index: 1;
 }
-
-
 
 
 .pivot {
@@ -243,12 +244,14 @@ input:valid ~ label {
 
 .small_color {
 	position: absolute;
-	height: 20px;
-	width: 20px;
-	left: 48%;
-	top: 56%;
-	background-color: #6200ee;
+	height: 15px;
+	width: 15px;
+	left: 45%;
+	top: 53.5%;
+	background-color: white;
 	border-radius: 50%;
+	border: 20px solid #6200ee;
+	z-index: -1;
 }
 
 .hour_color_div_clicked, .min_color_div_clicked {
@@ -259,32 +262,7 @@ input:valid ~ label {
 	top: 53.5%;
 	background-color: #6200ee;
 	border-radius: 50%;
-	/* z-index: -1; */
 }
-
-/* .min_color_div_clicked {
-	position: absolute;
-	height: 50px;
-	width: 50px;
-	left: 45%;
-	top: 53.5%;
-	border: 1px solid yellow;
-	background-color: orange; */
-	/* z-index: -1; */
-/* } */
-
-/* .hour_clock_number_clicked, .min_clock_number_clicked {
-    background-color: #6200ee;
-    position: absolute;
-    left: 45%;
-    top: 53.5%;
-    border-radius: 50%;
-    color: white;
-} */
-
-/* .hour_clock_number:nth-child(1) {
-	border: 10px solid orange;
-} */
 
 .hour_clock_number:nth-child(2), .hour_color_div:nth-child(1) {
     transform: rotate(-60deg) translate(160px) rotate(60deg)

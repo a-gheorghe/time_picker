@@ -1,8 +1,5 @@
 class timepicker {
     constructor() {
-        this.prev_hour = "12"
-        this.prev_minute = "00"
-        this.prev_time_of_day = "AM"
         this.hour = "12"
         this.minute = "00"
         this.time_of_day = "AM"
@@ -100,6 +97,15 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
     header.appendChild(morn)
 
     // add event listeners to elements
+
+
+    // make minute clock when clicking minute span element
+    // make hour clock when clicking hour span element
+    minute.addEventListener("click", () => make_min_clock())
+    hour.addEventListener("click", () => make_hour_clock())
+
+    // when clicking cancel button:
+        //
     cancel_text.addEventListener("click", () => {
         let hour_to_set;
         let input_fill = document.getElementById(`input-${input_num}`)
@@ -142,9 +148,11 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
         modal.remove()
     })
 
+    // when clicking ok:
+        // set this.hour to the most recent clicked on hour, ditto minute
+        // set the input to this.hour and this.min in proper input format
+        // remove the modal
     ok_text.addEventListener("click", () => {
-        this.prev_hour = this.hour
-        this.prev_minute = this.minute
         this.hour = temp_hour || this.hour
         this.minute = temp_minute || this.minute
         this.time_of_day = temp_time_of_day || this.time_of_day
@@ -189,11 +197,16 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
         modal.remove()
     })
 
+    // when clicking the AM button
+        // set the temp time of day to AM
     morn.addEventListener("click", () => {
         temp_time_of_day = "AM"
         aft.classList.remove("selected_text")
         morn.classList.add("selected_text")
     })
+
+    // when clicking the PM button
+        // set the temp time of day to PM
     aft.addEventListener("click", () => {
         temp_time_of_day = "PM"
         morn.classList.remove("selected_text")
@@ -369,13 +382,6 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
             })
         })
     }
-
-
-    // add event listeners:
-        // make minute clock when clicking minute span element
-        // make hour clock when clicking hour span element
-    minute.addEventListener("click", () => make_min_clock())
-    hour.addEventListener("click", () => make_hour_clock())
 
     // make hour clock initially as default
     make_hour_clock()
