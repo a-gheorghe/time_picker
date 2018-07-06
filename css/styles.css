@@ -1,24 +1,155 @@
+:root {
+    --primary: #e91e63;
+	--dark: #b0003a;
+	--light: #ff6090;
+}
+
+
 body, html {
     color:#6200EE;
     font-family: 'Roboto', sans-serif;
-    height: 100vh;
-    width: 100vw;
+    /* height: 100vh;
+    width: 100vw; */
     background-color: #f4f4f4;
 }
 
+/* PAGE */
+
 #main-div {
     position: relative;
-    height: 100vh;
-    width: 100vw;
+    /* height: 100vh;
+    width: 100vw; */
 }
+
+/* HEADER */
 
 .main-header {
-    height: 278px;
+    /* height: 278px;
     background-color: #6200ee;
     width: 100%;
-    position:absolute;
+    position:absolute; */
+	/* width: 100%; */
+	overflow: hidden;
+	border-top: 20px solid var(--dark);
+	background-color: var(--primary);
+	padding: 20px 10px;;
+	/* width: 100%; */
 }
 
+.main-header a {
+	float: left;
+	color: white;
+	text-align: center;
+	padding: 12px;
+	text-decoration: none;
+	font-size: 18px;
+	line-height: 25px;
+	border-radius: 4px;
+}
+
+.main-header a.logo {
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.main-header a:hover {
+	background-color: var(--light);
+	color: black;
+}
+
+.header a.active {
+	background-color: var(--light);
+	color: white;
+}
+
+.header-right {
+	float: right;
+}
+
+@media screen and (max-width: 500px) {
+	.header a {
+		float: none;
+		display: block;
+		text-align: left;
+	}
+	.header-right {
+		float: none;
+	}
+}
+
+/* PAGE BODY */
+
+.event-holder {
+	margin-top: 7%;
+	/* border: 1px solid black; */
+
+}
+
+.event-listing {
+    position: relative;
+    background-color: white;
+    margin: 0 auto;
+    padding: 3rem 1.75rem 2.5rem;
+    border-top: 15px solid var(--primary);
+    margin-bottom: 3rem;
+    border-radius: 6px;
+    width: 50%;
+    z-index: 999999;
+	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+}
+
+.group {
+	position:relative;
+	margin-bottom:8%;
+	margin-left: 10%;;
+}
+
+input {
+	width: 70%;
+	font-size:18px;
+	padding:10px 10px 10px 5px;
+	display:block;
+	border:none;
+	border-bottom:1px solid var(--dark);
+}
+
+input:focus {
+	outline:none;
+}
+
+label {
+	color:#999;
+	font-size:18px;
+	font-weight:normal;
+	position:absolute;
+	pointer-events:none;
+	left:5px;
+	top:10px;
+	transition:0.2s;
+}
+
+input:focus ~ label,
+input:valid ~ label {
+	top:-20px;
+	font-size:14px;
+	color:var(--dark);
+}
+
+
+.time-label {
+	top: -20px;
+}
+
+
+.time-input {
+	width: 65%;
+	display: inline;
+}
 
 #modal {
     position: fixed;
@@ -34,83 +165,20 @@ body, html {
     align-items: center;
 }
 
-.event-listing {
-    position: relative;
-    background-color: white;
-    margin: 0 auto;
-    padding: 3rem 1.75rem 2.5rem;
-    border-top: 15px solid #6200ee;
-    margin-bottom: 1.75rem;
-    border-radius: 6px;
-    width: 400px;
-    z-index: 999999;
-}
 
-/* form stylings */
-.group {
-  position:relative;
-  margin-bottom:45px;
-}
-
-input {
-  font-size:18px;
-  padding:10px 10px 10px 5px;
-  display:block;
-  width:350px;
-  border:none;
-  border-bottom:1px solid #757575;
-}
-
-input:focus {
-    outline:none;
-}
-
-label {
-    color:#999;
-    font-size:18px;
-    font-weight:normal;
-    position:absolute;
-    pointer-events:none;
-    left:5px;
-    top:10px;
-    transition:0.2s;
-}
-
-input:focus ~ label,
-input:valid ~ label {
-  top:-20px;
-  font-size:14px;
-  color:#5264AE;
-}
-
-
-.time-label {
-    top: -20px;
-}
-
-
-.time-input {
-    width: 340px;
-    display: inline;
-}
-
-.event-holder {
-    position: relative;
-    top: 300px;
-}
 
 .container {
     position: absolute;
     border-radius: 3px;
     z-index: 1;
     height: 700px;
-    width: 500px;
+    width: 50%;
     margin-bottom: 100px;
 }
 
 .header {
     height: 150px;
-    background-color: #6200ee;
+    background-color: var(--primary);
     color: #9e47ff
 }
 
@@ -203,7 +271,7 @@ input:valid ~ label {
     display: flex;
     align-items: center;
     justify-content: center;
-	border: 1px solid black;
+	/* border: 1px solid black; */
 	z-index: 1;
 }
 
@@ -250,7 +318,7 @@ input:valid ~ label {
 	top: 53.5%;
 	background-color: white;
 	border-radius: 50%;
-	border: 20px solid #6200ee;
+	border: 20px solid var(--primary);
 	z-index: -1;
 }
 
@@ -260,7 +328,7 @@ input:valid ~ label {
 	width: 50px;
 	left: 45%;
 	top: 53.5%;
-	background-color: #6200ee;
+	background-color: var(--primary);
 	border-radius: 50%;
 }
 
