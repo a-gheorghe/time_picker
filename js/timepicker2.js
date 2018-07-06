@@ -262,14 +262,41 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
 
         // add class to indicate clicked number (with edge cases)
         let curr_min;
-        if (this.minute === "00") {
-            curr_min = document.getElementById('min_clock_number_60')
-        } else if (this.minute >= 1 && this.minute < 10) {
-            curr_min = document.getElementById('min_clock_number_' + this.minute[1])
+
+        if (temp_minute) {
+            console.log('temp_minute is ', temp_minute)
+            if (temp_minute == "00") {
+                curr_min = document.getElementById('min_color_div_60')
+                curr_min.classList.add("min_color_div_clicked")
+            } else if (temp_minute >= 1 && temp_minute < 10) {
+                curr_min = document.getElementById('min_color_div_' + temp_minute[1])
+                curr_min.classList.add("min_color_div_clicked")
+
+                if (temp_minute % 5 !== 0) {
+                    curr_min.classList.add("small_color")
+                }
+
+            } else {
+                curr_min = document.getElementById(`min_color_div_${temp_minute}`)
+                curr_min.classList.add("min_color_div_clicked")
+
+                if (temp_minute % 5 !== 0) {
+                    curr_min.classList.add("small_color")
+                }
+            }
+            console.log('curr min is ', curr_min)
+            // curr_min.classList.add("min_color_div_clicked")
         } else {
-            curr_min = document.getElementById(`min_clock_number_${this.minute}`)
+            if (this.minute === "00") {
+                curr_min = document.getElementById('min_color_div_60')
+            } else if (this.minute >= 1 && this.minute < 10) {
+                curr_min = document.getElementById('min_color_div_' + this.minute[1])
+            } else {
+                curr_min = document.getElementById(`min_color_div_${this.minute}`)
+            }
+            curr_min.classList.add("min_color_div_clicked")
         }
-        curr_min.classList.add("min_color_div_clicked")
+
 
 
         // add event listener on each clock number to:
@@ -354,9 +381,16 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
         hour_clock_pivot.classList.add("pivot")
 
 
+        // add class to indicate clicked number / quasi working
+        // let curr_hour = document.getElementById(`hour_clock_number_${this.hour}`)
+        // curr_hour.classList.add("hour_color_div_clicked")
+
         // add class to indicate clicked number
-        let curr_hour = document.getElementById(`hour_clock_number_${this.hour}`)
+
+
+        let curr_hour = document.getElementById(`hour_clock_number_${temp_hour || this.hour}`)
         curr_hour.classList.add("hour_color_div_clicked")
+
 
 
         // add event listener on each clock number to:
@@ -375,8 +409,14 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
 
                 if (isNaN(number.id[number.id.length - 2])) {
                     temp_hour = "" + number.id[number.id.length - 1]
+                    hour.removeAttribute("id", "hour")
+                    hour.setAttribute("id", "single-hour")
                 } else {
                     temp_hour = "" + number.id[number.id.length - 2] + number.id[number.id.length - 1]
+                    if (hour.id === "single-hour") {
+                        hour.removeAttribute("id", "single-hour")
+                        hour.setAttribute("id", "hour")
+                    }
                 }
                 hour.textContent = temp_hour
             })
