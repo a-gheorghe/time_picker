@@ -103,7 +103,8 @@ body, html {
 input {
 	width: 70%;
 	font-size:1.125rem;
-	padding:10px 10px 10px 5px;
+	/* padding:10px 10px 10px 5px; */
+    padding: 5% 5% 5% 2.5%;
 	display:block;
 	border:none;
 	border-bottom:1px solid var(--dark);
@@ -133,14 +134,16 @@ input:valid ~ label {
 
 
 .time-label {
-	top: -20px;
+	top: -10%;
 }
 
 
 .time-input {
+    /* border: 1px solid black; */
 	width: 65%;
-	display: inline;
+	display: inline-block;
     background-color: white;
+    /* padding: 5% 5% 5% 2.5% */
 }
 
 /* MODAL */
@@ -167,7 +170,7 @@ input:valid ~ label {
     z-index: 1;
     height: 700px;
     width: 400px;
-    overflow-y: auto;
+    overflow: hidden;
     /* margin-bottom: 100px; */
     /* max-height: calc(100vh - 30px);
     max-width: calc(100vw);
@@ -839,6 +842,22 @@ input:valid ~ label {
 
     }
 
+    input:focus ~ label,
+    input:valid ~ label {
+    	top:-2%;
+    	font-size:1.143rem;
+    	color:var(--dark);
+        margin-bottom: 10px;
+        /* padding: 5% 5% 0 2.5%; */
+    }
+
+    .main-header a.logo {
+        font-size: 3rem;
+    }
+
+    .header-right {
+        font-size: 1em;
+    }
 
 
 }
