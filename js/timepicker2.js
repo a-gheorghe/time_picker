@@ -7,6 +7,7 @@ class timepicker {
 }
 
 timepicker.prototype.buildModal = function(input_num, h, m) {
+    // window.location.hash="#event-3"
     // if an hour and min are given from the input field
         // set this.hour to be the input field hour
         // set this.minute to be the input field minute
@@ -262,37 +263,48 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
 
         // add class to indicate clicked number (with edge cases)
         let curr_min;
-
+        // if navigating after changing minute once already
         if (temp_minute) {
             console.log('temp_minute is ', temp_minute)
+            // if temp minute is 00
             if (temp_minute == "00") {
                 curr_min = document.getElementById('min_color_div_60')
-                curr_min.classList.add("min_color_div_clicked")
+                // curr_min.classList.add("min_color_div_clicked")
+            // if temp minute is between 1 and 10, choose only the last number
             } else if (temp_minute >= 1 && temp_minute < 10) {
                 curr_min = document.getElementById('min_color_div_' + temp_minute[1])
-                curr_min.classList.add("min_color_div_clicked")
+                // curr_min.classList.add("min_color_div_clicked")
 
                 if (temp_minute % 5 !== 0) {
+                    // curr_min.classList.remove("min_color_div_clicked")
                     curr_min.classList.add("small_color")
                 }
-
+            // if temp minute is greater than 10
             } else {
                 curr_min = document.getElementById(`min_color_div_${temp_minute}`)
-                curr_min.classList.add("min_color_div_clicked")
+                // curr_min.classList.add("min_color_div_clicked")
 
-                if (temp_minute % 5 !== 0) {
+                if (temp_minute % 5 != 0) {
+                    // curr_min.classList.remove("min_color_div_clicked")
                     curr_min.classList.add("small_color")
                 }
             }
             console.log('curr min is ', curr_min)
-            // curr_min.classList.add("min_color_div_clicked")
+            curr_min.classList.add("min_color_div_clicked")
+
+        // if first time navigating to minute clock
         } else {
+
             if (this.minute === "00") {
                 curr_min = document.getElementById('min_color_div_60')
             } else if (this.minute >= 1 && this.minute < 10) {
                 curr_min = document.getElementById('min_color_div_' + this.minute[1])
             } else {
                 curr_min = document.getElementById(`min_color_div_${this.minute}`)
+            }
+
+            if (this.minute % 5 != 0) {
+                curr_min.classList.add("small_color")
             }
             curr_min.classList.add("min_color_div_clicked")
         }

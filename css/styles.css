@@ -9,35 +9,23 @@
 body, html {
     color:#6200EE;
     font-family: 'Roboto', sans-serif;
-    /* height: 100vh;
-    width: 100vw; */
     background-color: #f4f4f4;
 }
 
 /* PAGE */
-
 #main-div {
     position: relative;
-    /* height: 100vh;
-    width: 100vw; */
 }
 
 /* HEADER */
-
 .main-header {
-    /* height: 278px;
-    background-color: #6200ee;
-    width: 100%;
-    position:absolute; */
-	/* width: 100%; */
 	overflow: hidden;
 	border-top: 20px solid var(--dark);
 	background-color: var(--primary);
 	padding: 20px 10px;;
-	/* width: 100%; */
 }
 
-.main-header a {
+.main-header a, .main-header div.logo {
 	float: left;
 	color: white;
 	text-align: center;
@@ -48,7 +36,7 @@ body, html {
 	border-radius: 4px;
 }
 
-.main-header a.logo {
+.main-header div.logo {
 	font-size: 1.56rem;
 	font-weight: bold;
 }
@@ -65,15 +53,14 @@ body, html {
 
 .header-right {
 	float: right;
+    display: flex;
+    justify-content: flex-end;
 }
 
 
 /* PAGE BODY */
-
 .event-holder {
 	margin-top: 7%;
-	/* border: 1px solid black; */
-
 }
 
 .event-listing {
@@ -139,15 +126,12 @@ input:valid ~ label {
 
 
 .time-input {
-    /* border: 1px solid black; */
 	width: 65%;
 	display: inline-block;
     background-color: white;
-    /* padding: 5% 5% 5% 2.5% */
 }
 
 /* MODAL */
-
 #modal {
     position: fixed;
     left: 0;
@@ -233,8 +217,6 @@ input:valid ~ label {
 
 
 .m_body {
-    /* height: 500px; */
-    /* border-bottom: none; */
     height: 71.43%;
     border-color: transparent;
     display: flex;
@@ -245,7 +227,6 @@ input:valid ~ label {
 
 .option_box {
     height: 50px;
-    /* border-top: none; */
     border-color: transparent;
     background-color: white;
     color: var(--primary);
@@ -280,7 +261,6 @@ input:valid ~ label {
     display: flex;
     align-items: center;
     justify-content: center;
-	/* border: 1px solid black; */
 	z-index: 1;
 }
 
@@ -296,7 +276,6 @@ input:valid ~ label {
     position: absolute;
     height: 50px;
     width: 50px;
-    /* left: 45%; */
     top: 53.5%;
     color: black;
     font-size: 1.56em;
@@ -319,17 +298,6 @@ input:valid ~ label {
 	top: 53.5%;
 }
 
-.small_color {
-	position: absolute;
-	height: 15px;
-	width: 15px;
-	left: 45%;
-	top: 53.5%;
-	background-color: white;
-	border-radius: 50%;
-	border: 20px solid var(--light);
-	z-index: -1;
-}
 
 .hour_color_div_clicked, .min_color_div_clicked {
 	position: absolute;
@@ -341,6 +309,18 @@ input:valid ~ label {
 	border-radius: 50%;
 }
 
+.small_color {
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    left: 45%;
+    top: 53.5%;
+    background-color: white;
+    border-radius: 50%;
+    border: 20px solid var(--light);
+    z-index: -1;
+}
+/* Hour clock transformations */
 .hour_clock_number:nth-child(2), .hour_color_div:nth-child(1) {
     transform: rotate(-60deg) translate(160px) rotate(60deg)
 }
@@ -378,11 +358,7 @@ input:valid ~ label {
     transform: rotate(270deg) translate(160px) rotate(-270deg)
 }
 
-.hour_line {
-    stroke:black;
-    stroke-linecap:round;
-    stroke-width: 3px;
-}
+/* Minute clock transformations */
 
 .min_clock_number:nth-child(2), .min_color_div:nth-child(1) {
     transform: rotate(-84deg) translate(160px) rotate(84deg)
@@ -567,7 +543,7 @@ input:valid ~ label {
 
 /* MEDIA QUERIES */
 
-@media screen and (min-width: 500px) {
+/* @media screen and (min-width: 500px) {
 
 	.header a {
 		float: none;
@@ -577,7 +553,7 @@ input:valid ~ label {
 	.header-right {
 		float: none;
 	}
-}
+} */
 
 @media screen and (max-width: 500px) {
 
@@ -590,7 +566,8 @@ input:valid ~ label {
             z-index: 1;
             height: 350px;
             width: 200px;
-            margin-bottom: 100px;
+            overflow: hidden;
+            /* margin-bottom: 100px; */
     }
 
     #hour_clock_circle, #min_clock_circle {
@@ -833,14 +810,13 @@ input:valid ~ label {
     .min_clock_number:nth-child(120), .min_color_div:nth-child(119) {
         transform: rotate(270deg) translate(78px) rotate(-270deg)
     }
-
     .small_color {
         height: 7.5px;
         width: 7.5px;
         border: 10px solid var(--light);
         background-color: white;
-
     }
+
 
     input:focus ~ label,
     input:valid ~ label {
@@ -848,15 +824,28 @@ input:valid ~ label {
     	font-size:1.143rem;
     	color:var(--dark);
         margin-bottom: 10px;
-        /* padding: 5% 5% 0 2.5%; */
     }
 
-    .main-header a.logo {
+    input:focus, input:valid {
+        padding: 5% 5% 0 2.5%;
+        margin-top: 8px;
+
+    }
+
+/* .main-header {
+    clear:left;
+} */
+    .main-header div.logo {
         font-size: 3rem;
     }
 
     .header-right {
-        font-size: 1em;
+        border: 1px solid black;
+        float: left;
+    /* } */
+
+    .header-right a {
+        padding: 1em 2em;
     }
 
 
