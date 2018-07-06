@@ -2,6 +2,7 @@
     --primary: #e91e63;
 	--dark: #b0003a;
 	--light: #ff6090;
+    font-size: 16px;
 }
 
 
@@ -48,7 +49,7 @@ body, html {
 }
 
 .main-header a.logo {
-	font-size: 25px;
+	font-size: 1.56rem;
 	font-weight: bold;
 }
 
@@ -101,7 +102,7 @@ body, html {
 
 input {
 	width: 70%;
-	font-size:18px;
+	font-size:1.125rem;
 	padding:10px 10px 10px 5px;
 	display:block;
 	border:none;
@@ -114,7 +115,7 @@ input:focus {
 
 label {
 	color:#999;
-	font-size:18px;
+	font-size:1.125rem;
 	font-weight:normal;
 	position:absolute;
 	pointer-events:none;
@@ -126,7 +127,7 @@ label {
 input:focus ~ label,
 input:valid ~ label {
 	top:-20px;
-	font-size:14px;
+	font-size:1.143rem;
 	color:var(--dark);
 }
 
@@ -162,7 +163,7 @@ input:valid ~ label {
     border-radius: 3px;
     z-index: 1;
     height: 700px;
-    width: 50%;
+    width: 400px;
     margin-bottom: 100px;
 }
 
@@ -174,7 +175,7 @@ input:valid ~ label {
 
 /* styling for hour, colon and minutes */
 .header span {
-    font-size: 80px;
+    font-size: 5rem;
     position: absolute;
 }
 
@@ -182,40 +183,39 @@ input:valid ~ label {
 .header div {
     position: absolute;
     left: 366px;
-    font-size: 20px;
+    font-size: 1.25rem;
 }
 
 #hour {
-    left: 160px;
-    top: 25px;
+    left: 15%;
+    top: 4%;
 }
 
-
-
 #colon {
-    left: 248px;
-    top: 25px;
+    left: 42%;
+    top: 3.5%;
 }
 
 #minute {
-    left: 270px;
-    top: 25px;
+    left: 50%;
+    top: 4%;
+}
+
+#morn_text {
+    top: 7%;
+    left: 78%;
 }
 
 
-#morn_text {
-    top: 46px;
-    /* color: #9e47ff */
+#aft_text {
+    top: 12%;
+    left: 78%;
 }
 
 .selected_text {
     color: white;
 }
 
-#aft_text {
-    top: 76px;
-    /* color: #9e47ff */
-}
 
 .m_body {
     height: 500px;
@@ -236,7 +236,7 @@ input:valid ~ label {
 }
 
 .options {
-    font-size: 42px;
+    font-size: 2.625rem;
     position: relative;
 }
 
@@ -283,7 +283,7 @@ input:valid ~ label {
     left: 45%;
     top: 53.5%;
     color: black;
-    font-size: 25px;
+    font-size: 1.56rem;
 	z-index: 50;
 }
 
