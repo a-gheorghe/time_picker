@@ -6,11 +6,10 @@ class timepicker {
     }
 }
 
+/* BUILD MODAL FUNCTION BEGINS */
 timepicker.prototype.buildModal = function(input_num, h, m) {
-    // window.location.hash="#event-3"
     // if an hour and min are given from the input field
-        // set this.hour to be the input field hour
-        // set this.minute to be the input field minute
+        // set this object to reflect input field
     if (h) {
         if (h > 12) {
             this.hour = h - 12
@@ -32,6 +31,7 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
     if (this.hour == 0) {
         this.hour = 12
     }
+
     // declare variables
     let min_clock_circle;
     let hour_clock_circle;
@@ -84,6 +84,7 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
     hour.textContent = this.hour
     minute.textContent = this.minute
 
+    // append elements to one another to build modal
     options.appendChild(ok_text)
     options.appendChild(cancel_text)
     modal.appendChild(container)
@@ -97,8 +98,7 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
     header.appendChild(aft)
     header.appendChild(morn)
 
-    // add event listeners to elements
-
+     /* ADD EVENT LISTENERS START*/
 
     // make minute clock when clicking minute span element
     // make hour clock when clicking hour span element
@@ -106,7 +106,10 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
     hour.addEventListener("click", () => make_hour_clock())
 
     // when clicking cancel button:
-        //
+        //select the appropriate input element
+        // input element takes 24h time so convert to that
+        // set the input value to the converted hour + this.minute
+        // remove the modal element
     cancel_text.addEventListener("click", () => {
         let hour_to_set;
         let input_fill = document.getElementById(`input-${input_num}`)
@@ -149,9 +152,13 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
         modal.remove()
     })
 
-    // when clicking ok:
-        // set this.hour to the most recent clicked on hour, ditto minute
-        // set the input to this.hour and this.min in proper input format
+    // when clicking ok
+        // set this.hour to either the temp hour stored when clicking on clock
+            // or if didn't click on clock, keep this.hour
+        // same logic as ^ for minute and time of day
+        // get the appropriate input element
+        // convert 12h to 24h time
+        // set the input field value to hour_to_set + this.minute
         // remove the modal
     ok_text.addEventListener("click", () => {
         this.hour = temp_hour || this.hour
@@ -200,6 +207,7 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
 
     // when clicking the AM button
         // set the temp time of day to AM
+        // change classes for color change
     morn.addEventListener("click", () => {
         temp_time_of_day = "AM"
         aft.classList.remove("selected_text")
@@ -208,13 +216,20 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
 
     // when clicking the PM button
         // set the temp time of day to PM
+        // change classes for color change
     aft.addEventListener("click", () => {
         temp_time_of_day = "PM"
         morn.classList.remove("selected_text")
         aft.classList.add("selected_text")
     })
 
-    // FUNCTION THAT CREATES MINUTE CLOCK
+    /* EVENT LISTENERS END */
+
+
+
+    /* FUNCTION DECLARATIONS START */
+
+    /* Function that creates the minute clock begins */
     const make_min_clock = () => {
         // remove hour clock
         //or do nothing if minute clock already present
@@ -240,7 +255,6 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
 
             min_color_div.classList.add("min_color_div")
             min_color_div.setAttribute("id", `min_color_div_${i}`)
-
             min_clock_number.classList.add("min_clock_number")
             min_clock_number.setAttribute("id", `min_clock_number_${i}`)
             if (i % 5 === 0) {
@@ -249,6 +263,7 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
             if (i === 60) {
                 min_clock_number.textContent = "00"
             }
+
             min_clock_circle.appendChild(min_color_div)
             min_clock_circle.appendChild(min_clock_number)
         }
@@ -261,40 +276,27 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
         min_clock_circle.setAttribute("id", "min_clock_circle")
         min_clock_pivot.classList.add("pivot")
 
-        // add class to indicate clicked number (with edge cases)
+        // add classes to indicate clicked number (with edge cases)
         let curr_min;
-        // if navigating after changing minute once already
+        // temp_minute exists if already clicked on minute clock numbers
         if (temp_minute) {
-            console.log('temp_minute is ', temp_minute)
-            // if temp minute is 00
             if (temp_minute == "00") {
                 curr_min = document.getElementById('min_color_div_60')
-                // curr_min.classList.add("min_color_div_clicked")
-            // if temp minute is between 1 and 10, choose only the last number
             } else if (temp_minute >= 1 && temp_minute < 10) {
                 curr_min = document.getElementById('min_color_div_' + temp_minute[1])
-                // curr_min.classList.add("min_color_div_clicked")
-
                 if (temp_minute % 5 !== 0) {
-                    // curr_min.classList.remove("min_color_div_clicked")
                     curr_min.classList.add("small_color")
                 }
-            // if temp minute is greater than 10
             } else {
                 curr_min = document.getElementById(`min_color_div_${temp_minute}`)
-                // curr_min.classList.add("min_color_div_clicked")
-
                 if (temp_minute % 5 != 0) {
-                    // curr_min.classList.remove("min_color_div_clicked")
                     curr_min.classList.add("small_color")
                 }
             }
-            console.log('curr min is ', curr_min)
             curr_min.classList.add("min_color_div_clicked")
 
         // if first time navigating to minute clock
         } else {
-
             if (this.minute === "00") {
                 curr_min = document.getElementById('min_color_div_60')
             } else if (this.minute >= 1 && this.minute < 10) {
@@ -302,20 +304,18 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
             } else {
                 curr_min = document.getElementById(`min_color_div_${this.minute}`)
             }
-
             if (this.minute % 5 != 0) {
                 curr_min.classList.add("small_color")
             }
             curr_min.classList.add("min_color_div_clicked")
         }
 
-
-
         // add event listener on each clock number to:
-            // remove clicked class from all other numbers
-            // add clicked class to clicked number
-            // make this.minute equal the number clicked on (with edge cases (60, single digits))
-            // set the text of minute span element to this.minute
+            // remove min_color_div_clicked and small_color classes from all numbers
+            // add min_color_div_clicked class to clicked number
+            // if number is not divisible by 5, add small_color class to it
+            // set temp_minute equal to number clicked on
+            // set the text of minute span element to temp_minute
         let min_all_clock_numbers = Array.from(document.getElementsByClassName("min_clock_number"))
         min_all_clock_numbers.forEach((number) => {
             number.addEventListener("click", () => {
@@ -347,8 +347,9 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
             })
         })
     }
+    /* Function that creates minute clock ends */
 
-    // FUNCTION THAT CREATES HOUR CLOCK
+    /* Function that creates hour clock begins */
     const make_hour_clock = () => {
         // if hour clock exists already, do nothing
         // if minute clock exists, remove it
@@ -360,7 +361,6 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
         if (hour_clock_circle) {
             return;
         }
-
 
         // change colors on hour and minute
         minute.classList.remove("selected_text")
@@ -375,13 +375,12 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
 
             hour_color_div.classList.add("hour_color_div")
             hour_color_div.setAttribute("id", `hour_color_div_${i}`)
-
             hour_clock_number.classList.add("hour_clock_number")
             hour_clock_number.setAttribute("id", `hour_clock_number_${i}`)
             hour_clock_number.textContent = i;
+
             hour_clock_circle.appendChild(hour_color_div)
             hour_clock_circle.appendChild(hour_clock_number)
-            // hour_color_div.appendChild(hour_clock_number)
         }
 
         // append clock items to modal body
@@ -392,24 +391,27 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
         hour_clock_circle.setAttribute("id", "hour_clock_circle")
         hour_clock_pivot.classList.add("pivot")
 
-
-        // add class to indicate clicked number / quasi working
-        // let curr_hour = document.getElementById(`hour_clock_number_${this.hour}`)
-        // curr_hour.classList.add("hour_color_div_clicked")
-
         // add class to indicate clicked number
-
-
         let curr_hour = document.getElementById(`hour_clock_number_${temp_hour || this.hour}`)
         curr_hour.classList.add("hour_color_div_clicked")
 
-
+        // change size of initial hour div depending on if 1 or 2 digits
+        if (curr_hour.innerText.length === 1) {
+            hour.removeAttribute("id", "hour")
+            hour.setAttribute("id", "single-hour")
+        } else {
+            if (hour.id === "single-hour") {
+                hour.removeAttribute("id", "single-hour")
+                hour.setAttribute("id", "hour")
+            }
+        }
 
         // add event listener on each clock number to:
-            // remove clicked class from all other numbers
-            // add clicked class to clicked number
-            // make this.hour equal the number clicked on
-            // set the text of the hour span to this.hour
+            // remove hour_color_div_clicked class from all numbers
+            // add hour_color_div_clicked class to clicked number
+            // set temp_hour to equal number clicked on
+            // if the hour is a single digit, change the id to single-hour
+            // set the text of the hour span to temp_hour
         let hour_all_clock_numbers = Array.from(document.getElementsByClassName("hour_clock_number"))
         hour_all_clock_numbers.forEach((number) => {
             number.addEventListener("click", () => {
@@ -439,12 +441,20 @@ timepicker.prototype.buildModal = function(input_num, h, m) {
     make_hour_clock()
 }
 
+/* BUILD MODAL FUNCTION ENDS */
 
 
+
+// create 3 instances of timepicker
 let picker1 = new timepicker()
 let picker2 = new timepicker()
 let picker3 = new timepicker()
 
+
+// add event listener to the first clock icon
+// on click, call the timepicker's buildModal function
+// pass in 1 as the parameter to connect to the first input field
+// if input fields are filled in, pass those in to buildModal for hour and min
 
 const clock_icon1 = document.getElementById("clock_icon1")
 const input1 = document.getElementById("input-1")
@@ -460,7 +470,7 @@ clock_icon1.addEventListener("click", () => {
     }
 })
 
-
+// similar event listener as for clock icon above
 const clock_icon2 = document.getElementById("clock_icon2")
 const input2 = document.getElementById("input-2")
 clock_icon2.addEventListener("click", () => {
@@ -475,6 +485,7 @@ clock_icon2.addEventListener("click", () => {
     }
 })
 
+// similar event listener as for clock icon above
 const clock_icon3 = document.getElementById("clock_icon3")
 const input3 = document.getElementById("input-3")
 clock_icon3.addEventListener("click", () => {

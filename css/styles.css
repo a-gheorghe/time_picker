@@ -90,7 +90,6 @@ body, html {
 input {
 	width: 70%;
 	font-size:1.125rem;
-	/* padding:10px 10px 10px 5px; */
     padding: 5% 5% 5% 2.5%;
 	display:block;
 	border:none;
@@ -146,8 +145,6 @@ input:valid ~ label {
     align-items: center;
 }
 
-
-
 .container {
     position: absolute;
     border-radius: 3px;
@@ -155,10 +152,6 @@ input:valid ~ label {
     height: 700px;
     width: 400px;
     overflow: hidden;
-    /* margin-bottom: 100px; */
-    /* max-height: calc(100vh - 30px);
-    max-width: calc(100vw);
-    overflow-y: auto; */
 }
 
 .header {
@@ -264,7 +257,6 @@ input:valid ~ label {
 	z-index: 1;
 }
 
-
 .pivot {
     height: 10px;
     width: 10px;
@@ -298,7 +290,6 @@ input:valid ~ label {
 	top: 53.5%;
 }
 
-
 .hour_color_div_clicked, .min_color_div_clicked {
 	position: absolute;
 	height: 50px;
@@ -320,6 +311,7 @@ input:valid ~ label {
     border: 20px solid var(--light);
     z-index: -1;
 }
+
 /* Hour clock transformations */
 .hour_clock_number:nth-child(2), .hour_color_div:nth-child(1) {
     transform: rotate(-60deg) translate(160px) rotate(60deg)
@@ -543,20 +535,7 @@ input:valid ~ label {
 
 /* MEDIA QUERIES */
 
-/* @media screen and (min-width: 500px) {
-
-	.header a {
-		float: none;
-		display: block;
-		text-align: left;
-	}
-	.header-right {
-		float: none;
-	}
-} */
-
 @media screen and (max-width: 500px) {
-
     :root {
         font-size: 8px;
     }
@@ -567,7 +546,6 @@ input:valid ~ label {
             height: 350px;
             width: 200px;
             overflow: hidden;
-            /* margin-bottom: 100px; */
     }
 
     #hour_clock_circle, #min_clock_circle {
@@ -589,7 +567,7 @@ input:valid ~ label {
         width: 30px;
     }
 
-    /* Hour clock numbers */
+    /* Hour clock number transformations */
     .hour_clock_number:nth-child(2), .hour_color_div:nth-child(1) {
         transform: rotate(-60deg) translate(78px) rotate(60deg)
     }
@@ -629,7 +607,7 @@ input:valid ~ label {
 
 
 
-    /* Minute clock numbers */
+    /* Minute clock number transformations */
     .min_clock_number:nth-child(2), .min_color_div:nth-child(1) {
         transform: rotate(-84deg) translate(78px) rotate(84deg)
     }
@@ -832,20 +810,16 @@ input:valid ~ label {
 
     }
 
-/* .main-header {
-    clear:left;
-} */
     .main-header div.logo {
         font-size: 3rem;
     }
 
     .header-right {
-        border: 1px solid black;
         float: left;
-    /* } */
+    }
 
     .header-right a {
-        padding: 1em 2em;
+        padding: 1em 1em;
     }
 
 
