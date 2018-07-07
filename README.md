@@ -4,7 +4,9 @@ In this project, I created an implementation of a time-picker using HTML, CSS, a
 
 ## Getting started
 
-To see this project locally, clone the repo or download it onto your computer. Then, open the HTML page in any internet browser.
+To see this project locally:
+- clone the repo or download it onto your computer
+- open `index.html` any internet browser
 
 ## Description
 
@@ -17,7 +19,7 @@ The time can be set by either manually filling in the input field OR by clicking
 
 ### Modal:
   - The hour clock shows first by default
-  - To see / set the minutes, click on the minutes text in the modal healder
+  - To see / set the minutes, click on the minutes text in the modal header
   - The time can be changed by clicking the hour / minute numbers
   - Clicking OK sets the associated input field with the chosen time
   - CLicking CANCEL reverts back to the previous input time value (or 12:00 AM if no previous value)
