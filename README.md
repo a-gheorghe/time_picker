@@ -27,24 +27,31 @@ The time can be set by either manually filling in the input field OR by clicking
 ## Screenshots
 
 **On page load** 
+
 ![alt text](./screenshots/baseline.png?raw=true "Baseline")
 
 **Filling in event details, setting time to `09:00 PM `** 
+
 ![alt text](./screenshots/first_clock_input.png?raw=true "First input")
 
 **Modal loads with `9:00 PM` selected** 
+
 ![alt text](./screenshots/modal_first_clock.png?raw=true "First modal")
 
 **Changing the time to `11:28 PM`**
+
 ![alt text](./screenshots/modal_first_clock_changed.png?raw=true "Changing first modal")
 
 **This change is reflected in the input field** 
+
 ![alt text](./screenshots/updated_first_clock.png?raw=true "Change in input field")
 
-**The different events each can be set with their own times **
+**The different events each can be set with their own times**
+
 ![alt text](./screenshots/second_clock_input.png?raw=true "Diff events, diff times")
 
-**Responsive, can be used in mobile as well ** 
+**Responsive, can be used in mobile as well** 
+
 ![alt text](./screenshots/mobile_view.png?raw=true "Mobile view")
 
 
