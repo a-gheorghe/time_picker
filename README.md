@@ -5,8 +5,8 @@ In this project, I created an implementation of a time-picker using HTML, CSS, a
 ## Getting started
 
 To see this project locally:
-- clone the repo or download it onto your computer
-- open `index.html` any internet browser
+- Clone the repo or download it onto your computer
+- Cpen the `index.html` file in any internet browser
 
 ## Description
 
