@@ -14,3 +14,10 @@ Clicking on the minutes at the top of the modal will render a minute clock. The 
 Clicking OK will set the associated input field to the time chosen in the modal. Clicking CANCEL will revert back to the previous time.
 
 ![alt text](./screenshots/baseline.png?raw=true "Baseline")
+![alt text](./screenshots/first_clock_input.png?raw=true "First input")
+![alt text](./screenshots/modal_first_clock.png?raw=true "First modal")
+![alt text](./screenshots/modal_first_clock_changed.png?raw=true "Changing first modal")
+
+
+
+
