@@ -13,4 +13,4 @@ Clicking on the minutes at the top of the modal will render a minute clock. The 
 
 Clicking OK will set the associated input field to the time chosen in the modal. Clicking CANCEL will revert back to the previous time.
 
-![alt text](https://github.com/a-gheorghe/time_picker/blob/master/screenshots/)
+![alt text](/screenshots/baseline.png?raw=true "Baseline)
